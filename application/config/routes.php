@@ -450,7 +450,7 @@
     $route[ 'lab/sale-package' ]                                         = 'Lab/sale_package';
     $route[ 'lab/load-lab-tests' ]                                       = 'Lab/load_lab_tests';
     $route[ 'lab/visible-to-admin-only/(:any)' ]                         = 'Lab/visible_to_admin_only/$1';
-    $route[ 'medical-tests/index' ]                                      = 'MedicalTests/index';
+    $route[ 'medical-tests/index' ]                                       = 'MedicalTests/index';
     $route[ 'medical-tests/add' ]                                        = 'MedicalTests/add';
     $route[ 'medical-tests/add-general-info' ]                           = 'MedicalTests/add_general_info';
     $route[ 'medical-tests/edit/(:any)' ]                                = 'MedicalTests/edit/$1';

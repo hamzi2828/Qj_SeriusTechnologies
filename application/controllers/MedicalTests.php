@@ -29,6 +29,7 @@
             }
         }
         
+
         public function index () {
             $title = site_name . ' - All Medical Tests';
             $this -> header ( $title );
