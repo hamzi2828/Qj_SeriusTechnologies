@@ -1,0 +1,130 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+		<?php if(validation_errors() != false) { ?>
+            <div class="alert alert-danger validation-errors">
+				<?php echo validation_errors(); ?>
+            </div>
+		<?php } ?>
+		<?php if($this -> session -> flashdata('error')) : ?>
+            <div class="alert alert-danger">
+				<?php echo $this -> session -> flashdata('error') ?>
+            </div>
+		<?php endif; ?>
+		<?php if($this -> session -> flashdata('response')) : ?>
+            <div class="alert alert-success">
+				<?php echo $this -> session -> flashdata('response') ?>
+            </div>
+		<?php endif; ?>
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-reorder"></i> Add Transaction (Multiple)
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form role="form" method="post" autocomplete="off">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>" id="csrf_token">
+                    <input type="hidden" name="action" value="add_transactions_multiple">
+                    <input type="hidden" id="added" value="1">
+                    <div class="form-body" style="overflow:auto;">
+                        <div class="form-group col-lg-offset-3 col-lg-3">
+                            <label for="exampleInputEmail1">Date</label>
+                            <input type="text" name="trans_date" class="date date-picker form-control" placeholder="Transaction date"  required="required" value="<?php echo date('m/d/Y') ?>">
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="exampleInputEmail1">Voucher Number</label>
+                            <select name="voucher_number" class="form-control select2me" required="required">
+                                <option value="CPV">CPV</option>
+                                <option value="CRV">CRV</option>
+                                <option value="BPV">BPV</option>
+                                <option value="BRV">BRV</option>
+                                <option value="JV">JV</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-body" style="overflow:auto;">
+                        <div class="form-group col-lg-5">
+                            <label for="exampleInputEmail1">Choose Account Head</label>
+                            <select name="acc_head_id[]" class="form-control select2me" required="required" id="acc_head_id" onchange="check_account_type(this.value, 1)">
+                                <option value="0">Select Account Head</option>
+                                <?php
+                                if(count($account_heads) > 0) {
+                                    foreach ($account_heads as $account_head) {
+                                        $child = if_has_child($account_head -> id);
+                                        ?>
+                                        <option value="<?php echo $account_head -> id ?>" class="<?php if($child > 0) echo 'has-child' ?>">
+                                            <?php echo $account_head -> title ?>
+                                        </option>
+                                        <?php
+                                        echo get_child_account_heads($account_head -> id, '-1');
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label class="">Transaction Type</label>
+                            <div class="radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" name="transaction_type[]" id="debit-1" value="credit" required="required"> Debit
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="transaction_type[]" id="credit-1" value="debit" required="required"> Credit
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="exampleInputEmail1">Amount</label>
+                            <input type="text" name="amount[]" class="form-control price-1" placeholder="Add amount" value="<?php echo set_value('amount') ?>" required="required" onchange="sum_first_transaction_amount()">
+                        </div>
+                        <div class="add-more"></div>
+                        <div class="form-group col-lg-12">
+                            <label class="">Description</label>
+                            <textarea name="description" rows="5" class="form-control" required="required"><?php echo set_value('description') ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 25px">
+                        <div class="row">
+                            <div class="form-group col-lg-offset-9 col-lg-3">
+                                <label for="exampleInputEmail1">First Transaction Amount</label>
+                                <div class="doctor">
+                                    <input type="text" class="form-control first-transaction" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-offset-9 col-lg-3">
+                                <label for="exampleInputEmail1">Other Transactions Total</label>
+                                <div class="doctor">
+                                    <input type="text" class="form-control other-transactions" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn blue" id="add-transaction">Submit</button>
+                        <button type="button" class="btn purple" onclick="add_more_transactions()">Add More</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+</div>
+<style>
+    .has-child {
+        font-weight: 600;
+    }
+    .child {
+        padding-left: 15px;
+    }
+    .sub-child {
+        padding-left: 30px;
+    }
+    .has-sub-child {
+        font-weight: 600;
+        padding-left: 15px;
+    }
+</style>
