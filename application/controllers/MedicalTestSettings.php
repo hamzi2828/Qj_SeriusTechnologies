@@ -103,5 +103,14 @@
             $this -> session -> set_flashdata ( 'response', 'Success! OEP deleted.' );
             return redirect ( $_SERVER[ 'HTTP_REFERER' ] );
         }
+
+
+
+
+        public function edit_template ( $id ) {
+            
+            var_dump($id);
+
+        }
         
     }

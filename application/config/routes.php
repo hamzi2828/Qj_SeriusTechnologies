@@ -468,8 +468,24 @@
     $route[ 'invoices/medical-test-ticket/(:any)' ]                      = 'Invoices/medical_test_ticket/$1';
     $route[ 'medical-test-settings/oep/index' ]                          = 'MedicalTestSettings/all_oep';
     $route[ 'medical-test-settings/oep/create' ]                         = 'MedicalTestSettings/add_oep';
-    $route[ 'medical-test-settings/oep/edit/(:any)' ]                    = 'MedicalTestSettings/edit_oep/$1';
+    // $route[ 'medical-test-settings/oep/edit/(:any)' ]                    = 'MedicalTestTemplates/edit_template/$1';
     $route[ 'medical-test-settings/oep/destroy/(:any)' ]                 = 'MedicalTestSettings/delete_oep/$1';
+   
+
+ 
+    $route['medical-test/template/add']                                   = 'MedicalTestTemplates/add_lab_template';
+    $route['medical-test-settings/template/create']                       = 'MedicalTestTemplates/store_lab_template';
+    $route['medical-test/all/templates']                                  = 'MedicalTestTemplates/all_lab_templates';
+    $route[ 'medical-test-settings/template/edit/(:any)' ]                    = 'MedicalTestTemplates/edit_template/$1';
+    $route['medical-test/template/delete/(:num)']                         = 'LabTemplateController/delete_template/$1';
+
+
+   
+   
+   
+   
+   
+   
     $route[ 'settings/add-references' ]                                  = 'Settings/add_references';
     $route[ 'settings/delete-reference/(:any)' ]                         = 'Settings/delete_reference/$1';
     $route[ 'settings/edit-reference/(:any)' ]                           = 'Settings/edit_reference/$1';

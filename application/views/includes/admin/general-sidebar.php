@@ -1933,6 +1933,11 @@
                     </ul>
                 </li>
             <?php endif; ?>
+
+
+
+
+
             
             <?php if ( !empty( $access ) and in_array ( 'medical-test-settings', explode ( ',', $access -> access ) ) ) : ?>
                 <li class="<?php if ( $parent_uri == 'medical-test-settings' )
@@ -1962,6 +1967,43 @@
                     </ul>
                 </li>
             <?php endif; ?>
+
+
+
+
+            <?php if ( !empty( $access ) and in_array ( 'medical-test-settings', explode ( ',', $access -> access ) ) ) : ?>
+                <li class="<?php if ( $parent_uri == 'medical-test-settings' )
+                    echo 'start active'; ?>">
+                    <a href="javascript:void(0);">
+                        <i class="fa fa-cog"></i>
+                        <span class="title"> Medical test Settings </span>
+                        <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+
+                    <?php if ( !empty( $access ) and in_array ( 'all-oep', explode ( ',', $access -> access ) ) ) : ?>
+                            <li class="<?php if ( $child_uri == 'oep' && $sub_child_uri == 'index' )
+                                echo 'active'; ?>">
+                                <a href="<?php echo base_url ( 'medical-test/all/templates' ) ?>">
+                                    All Templates
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                      
+                        <?php if ( !empty( $access ) and in_array ( 'add-oep', explode ( ',', $access -> access ) ) ) : ?>
+                            <li class="<?php if ( $child_uri == 'oep' && $sub_child_uri == 'create' )
+                                echo 'active'; ?>">
+                                <a href="<?php echo base_url ( 'medical-test/template/add' ) ?>">
+                                    Add Template
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </li>
+            <?php endif; ?>
+
+
+
             
             <?php if ( !empty( $access ) and in_array ( 'general_settings', explode ( ',', $access -> access ) ) ) : ?>
                 <li class="<?php if ( $parent_uri == 'settings' and @$_REQUEST[ 'settings' ] == 'general' )
