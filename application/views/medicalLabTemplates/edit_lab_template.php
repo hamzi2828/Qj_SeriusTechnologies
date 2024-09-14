@@ -60,9 +60,11 @@
 
 
 <div class="container mt-4">
-    <form action="<?php echo base_url('/medical-test-settings/template/update'); ?>" method="post" id="templateForm">
-        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-        <input type="hidden" name="action" value="do_edit_template">
+  
+
+        <form action="<?php echo base_url('/medical-test-settings/template/update'); ?>" method="post" id="templateForm">
+        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+      
         <input type="hidden" name="template_id" value="<?php echo isset($template->id) ? $template->id : ''; ?>">
 
         <div class="form-body" style="background: transparent;">

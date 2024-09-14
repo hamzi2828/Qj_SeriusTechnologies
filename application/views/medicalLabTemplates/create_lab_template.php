@@ -62,7 +62,7 @@
 <div class="container mt-4">
     <form action="<?php echo base_url ( '/medical-test-settings/template/create' ) ?>" method="post" id="templateForm">
         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-        <input type="hidden" name="action" value="do_add_account_head">
+      
 
         <div class="form-body" style="background: transparent;">
             <h3>

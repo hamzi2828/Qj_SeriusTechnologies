@@ -44,7 +44,9 @@
                         <td>
                             <a href="<?php echo base_url ( '/medical-test-settings/template/edit/' . $template -> id ) ?>" class="btn btn-sm btn-success">Edit</a>
 									
-                            <a href="<?php echo base_url('/medical-test/template/delete/'.$template->id); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this template?');">Delete</a>
+                            <a href="<?php echo base_url ( '/medical-test/template/delete/' . $template -> id ) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this template?');">Delete</a>
+
+                            <a href="<?php echo base_url('/medical-test/template/duplicate/' . $template->id); ?>" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure you want to duplicate this template?');">Duplicate</a>
                         </td>
                     </tr>
                     <?php
