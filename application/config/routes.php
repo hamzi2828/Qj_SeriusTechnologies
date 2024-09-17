@@ -455,7 +455,7 @@
     $route[ 'medical-tests/add-general-info' ]                           = 'MedicalTests/add_general_info';
     $route[ 'medical-tests/edit/(:any)' ]                                = 'MedicalTests/edit/$1';
 
-    $route['MedicalTests/get_template']                                   = 'MedicalTests/get_template';
+    $route['MedicalTests/get_template']                                     = 'MedicalTests/_template';
 
 
 

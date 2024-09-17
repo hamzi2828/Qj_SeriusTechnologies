@@ -14,4 +14,8 @@
     <li class="">
         <a href="javascript:void(0)">Lab Investigations</a>
     </li>
+
+    <li class="">
+        <a href="javascript:void(0)">Lab Investigations(custom)</a>
+    </li>
 </ul>

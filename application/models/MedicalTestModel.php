@@ -74,7 +74,7 @@
             $test = $this -> db -> get_where ( 'medical_test_history', array ( 'medical_test_id' => $id ) );
             return $test -> row ();
         }
-        
+         
         public function get_medical_test_physical_examination ( $id ) {
             $test = $this -> db -> get_where ( 'medical_test_physical_examination', array ( 'medical_test_id' => $id ) );
             return $test -> row ();

@@ -34,6 +34,9 @@
             $this -> load -> model ( 'CultureModel' );
             $this -> load -> model ( 'HistopathologyModel' );
             $this -> load -> model ( 'MedicalTestModel' );
+            $this -> load ->model('LabTemplateModel'); 
+            $this -> load ->library('session'); 
+            $this -> load ->helper('url'); 
             $this -> load -> library ( 'pdf' );
         }
         
@@ -3969,7 +3972,12 @@
             $data[ 'test' ]                 = $this -> MedicalTestModel -> get_medical_test ( $id );
             $data[ 'history' ]              = $this -> MedicalTestModel -> get_medical_test_history ( $id );
             $data[ 'physical_examination' ] = $this -> MedicalTestModel -> get_medical_test_physical_examination ( $id );
-            $data[ 'lab_investigation' ]    = $this -> MedicalTestModel -> get_medical_test_lab_investigation ( $id );
+            if ($this->input->get('custom') == 'true') {
+                $data[ 'lab_investigation' ] = $this->MedicalTestModel->get_template_rows_by_medical_test_id($id);
+            }
+            else{
+                $data[ 'lab_investigation' ]    = $this -> MedicalTestModel -> get_medical_test_lab_investigation ( $id );
+            }
             $html_content                   = $this -> load -> view ( '/invoices/medical-test-report', $data, true );
             
             if ( $data[ 'test' ] -> fit === '0' )

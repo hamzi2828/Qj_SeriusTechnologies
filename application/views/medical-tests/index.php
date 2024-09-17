@@ -171,6 +171,10 @@
                                             
                                             <a class="btn purple" target="_blank"
                                                href="<?php echo base_url ( '/invoices/medical-test/' . $test -> id . '/?logo=false' ) ?>">Print</a>
+
+                                               <a class="btn purple" target="_blank"
+                                               href="<?php echo base_url ( '/invoices/medical-test/' . $test -> id . '/?custom=true' ) ?>">L-Print-C</a>
+
                                         <?php endif; ?>
                                         
                                         <?php if ( get_user_access ( get_logged_in_user_id () ) and in_array ( 'print-medical-test-ticket', explode ( ',', get_user_access ( get_logged_in_user_id () ) -> access ) ) ) : ?>
