@@ -20,4 +20,10 @@
             Lab Investigations
         </a>
     </li>
+
+    <li class="<?php echo $this -> input -> get ( 'tab' ) === 'lab-investigation-custom' ? 'active' : '' ?>">
+        <a href="<?php echo base_url ( '/medical-tests/edit/' . $test -> id . '?tab=lab-investigation-custom' ) ?>">
+            Lab Investigations(custom)
+        </a>
+    </li>
 </ul>

@@ -454,6 +454,11 @@
     $route[ 'medical-tests/add' ]                                        = 'MedicalTests/add';
     $route[ 'medical-tests/add-general-info' ]                           = 'MedicalTests/add_general_info';
     $route[ 'medical-tests/edit/(:any)' ]                                = 'MedicalTests/edit/$1';
+
+    $route['MedicalTests/get_template']                                   = 'MedicalTests/get_template';
+
+
+
     $route[ 'medical-tests/edit-general-info/(:any)' ]                   = 'MedicalTests/edit_general_info/$1';
     $route[ 'medical-tests/upsert-history/(:any)' ]                      = 'MedicalTests/upsert_history/$1';
     $route[ 'medical-tests/upsert-general-physical-examination/(:any)' ] = 'MedicalTests/upsert_general_physical_examination/$1';
@@ -480,6 +485,8 @@
     $route['medical-test/template/delete/(:any)']                         = 'MedicalTestTemplates/delete_template/$1';
     $route['medical-test-settings/template/update']                       = 'MedicalTestTemplates/update_template';
     $route['medical-test/template/duplicate/(:any)']                       = 'MedicalTestTemplates/duplicate_template/$1';
+
+
 
 
 

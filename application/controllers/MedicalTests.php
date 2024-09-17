@@ -8,6 +8,9 @@
             $this -> load -> model ( 'MedicalTestModel' );
             $this -> load -> model ( 'CountryModel' );
             $this -> load -> model ( 'OEPModel' );
+            $this->load->model('LabTemplateModel'); 
+            $this->load->library('session'); 
+            $this->load->helper('url'); 
         }
         
         public function header ( $title ) {
@@ -141,9 +144,45 @@
             $data[ 'history' ]              = $this -> MedicalTestModel -> get_medical_test_history ( $id );
             $data[ 'physical_examination' ] = $this -> MedicalTestModel -> get_medical_test_physical_examination ( $id );
             $data[ 'lab_investigation' ]    = $this -> MedicalTestModel -> get_medical_test_lab_investigation ( $id );
+            $data['templates'] = $this->LabTemplateModel->get_all_templates();
+            $data['template_rows'] = $this->MedicalTestModel->get_template_rows_by_medical_test_id($id);
+          
+                //  echo "<pre>";
+                // echo "Template Data:\n";
+                // print_r(  $data['template_rows'] );
+                // echo "</pre>";
+                // exit;
             $this -> load -> view ( '/medical-tests/edit', $data );
             $this -> footer ();
         }
+
+        public function get_template() {
+            $template_id = $this->input->post('template_id');
+            $template = $this->LabTemplateModel->get_template_by_id($template_id);
+            $template_rows = $this->LabTemplateModel->get_template_rows_by_template_id($template_id);
+        
+            // Check if the template exists and respond accordingly
+            if ($template) {
+                // Return a JSON response with status success
+                echo json_encode([
+                    'status' => 'success', 
+                    'template' => $template,
+                    'template_rows' => $template_rows,
+                    'redirect_url' => base_url('desired_redirect_page') // Add redirect URL if needed
+                ]);
+            } else {
+                // Return an error response if template not found
+                echo json_encode([
+                    'status' => 'error', 
+                    'message' => 'Template not found.'
+                ]);
+            }
+        
+            // Terminate further script execution to ensure clean output
+            exit;
+        }
+        
+        
         
         public function edit_general_info ( $id ) {
             $this -> form_validation -> set_rules ( 'name', 'name', 'required|trim|min_length[1]|xss_clean' );
@@ -252,47 +291,94 @@
         
         public function add_lab_investigation ( $medical_test_id ) {
             $this -> MedicalTestModel -> delete_lab_investigation ( $medical_test_id );
-            $info = array (
-                'user_id'         => get_logged_in_user_id (),
-                'medical_test_id' => $medical_test_id,
-                'hb'              => $this -> input -> post ( 'hb', true ),
-                'ast'             => $this -> input -> post ( 'ast', true ),
-                'urea'            => $this -> input -> post ( 'urea', true ),
-                'bsr'             => $this -> input -> post ( 'bsr', true ),
-                'creatinine'      => $this -> input -> post ( 'creatinine', true ),
-                'bilirubin'       => $this -> input -> post ( 'bilirubin', true ),
-                'alt'             => $this -> input -> post ( 'alt', true ),
-                'anti_hcv'        => $this -> input -> post ( 'anti-hcv', true ),
-                'hbsag'           => $this -> input -> post ( 'hbsag', true ),
-                'hiv'             => $this -> input -> post ( 'hiv', true ),
-                'vdrl'            => $this -> input -> post ( 'vdrl', true ),
-                'tuberculosis'    => $this -> input -> post ( 'tuberculosis', true ),
-                'blood_group'     => $this -> input -> post ( 'blood-group', true ),
-                'ph'              => $this -> input -> post ( 'ph', true ),
-                'sugar'           => $this -> input -> post ( 'sugar', true ),
-                'albumin'         => $this -> input -> post ( 'albumin', true ),
-                'pus_cells'       => $this -> input -> post ( 'pus-cells', true ),
-                'ova_cysts'       => $this -> input -> post ( 'ova-cysts', true ),
-                'rbcs'            => $this -> input -> post ( 'rbcs', true ),
-                'amphetamine'     => $this -> input -> post ( 'amphetamine', true ),
-                'benzodiazepine'  => $this -> input -> post ( 'benzodiazepine', true ),
-                'marijuana'       => $this -> input -> post ( 'marijuana', true ),
-                'methamphetamine' => $this -> input -> post ( 'methamphetamine', true ),
-                'anti_depressant' => $this -> input -> post ( 'anti-depressant', true ),
-                'barbiturate'     => $this -> input -> post ( 'barbiturate', true ),
-                'cocaine'         => $this -> input -> post ( 'cocaine', true ),
-                'methadone'       => $this -> input -> post ( 'methadone', true ),
-                'phencyclidine'   => $this -> input -> post ( 'phencyclidine', true ),
-                'x_ray_chest'     => $this -> input -> post ( 'x-ray-chest', true ),
-            );
-            $id   = $this -> MedicalTestModel -> add_lab_investigation ( $info );
-            if ( $id > 0 ) {
-                $this -> session -> set_flashdata ( 'response', 'Success! Medical test lab investigations added.' );
-                return redirect ( base_url ( '/medical-tests/edit/' . $medical_test_id . '?tab=lab-investigation' ) );
+
+
+                // echo "<pre>";
+                // echo "Template Data:\n";
+                // print_r( $this->input->post() );
+                // echo "</pre>";
+                // exit;
+
+                  // Check if the form is submitted as a custom lab investigation
+        $is_custom = $this->input->post('is_custom', true);
+
+        // If the investigation is custom, save data to the custom table
+        if ($is_custom == 1) {
+            $this->MedicalTestModel->delete_lab_investigation_custom($medical_test_id);
+            // Get the template ID from the form submission
+                $template_id = $this->input->post('selected_template_id', true);
+            // Gather custom data
+            $headers = [];
+            for ($i = 1; $i <= 6; $i++) {
+                $header_name = $this->input->post("header_name_$i", true);
+                $row_names = $this->input->post("row_name_$i");
+                $row_values = $this->input->post("row_value_$i");
+
+                if (!empty($header_name) && !empty($row_names) && !empty($row_values)) {
+                    foreach ($row_names as $index => $row_name) {
+                        // Insert each row into the custom table
+                        $custom_data = [
+                            'user_id' => get_logged_in_user_id(),
+                            'medical_test_id' => $medical_test_id,
+                            'template_id' => $template_id,
+                            'header_name' => $header_name,
+                            'row_name' => $row_name,
+                            'row_value' => $row_values[$index],
+                        ];
+                        // Save to custom table
+                        $this->MedicalTestModel->add_custom_lab_investigation($custom_data);
+                    }
+                }
             }
-            else {
-                $this -> session -> set_flashdata ( 'error', 'Error! Member type not added. Please try again' );
-                return false;
+
+            // Set success message and redirect
+            $this->session->set_flashdata('response', 'Success! Custom lab investigations added.');
+            return redirect(base_url('/medical-tests/edit/' . $medical_test_id . '?tab=lab-investigation-custom'));
+        } 
+        
+        else {
+                $info = array (
+                    'user_id'         => get_logged_in_user_id (),
+                    'medical_test_id' => $medical_test_id,
+                    'hb'              => $this -> input -> post ( 'hb', true ),
+                    'ast'             => $this -> input -> post ( 'ast', true ),
+                    'urea'            => $this -> input -> post ( 'urea', true ),
+                    'bsr'             => $this -> input -> post ( 'bsr', true ),
+                    'creatinine'      => $this -> input -> post ( 'creatinine', true ),
+                    'bilirubin'       => $this -> input -> post ( 'bilirubin', true ),
+                    'alt'             => $this -> input -> post ( 'alt', true ),
+                    'anti_hcv'        => $this -> input -> post ( 'anti-hcv', true ),
+                    'hbsag'           => $this -> input -> post ( 'hbsag', true ),
+                    'hiv'             => $this -> input -> post ( 'hiv', true ),
+                    'vdrl'            => $this -> input -> post ( 'vdrl', true ),
+                    'tuberculosis'    => $this -> input -> post ( 'tuberculosis', true ),
+                    'blood_group'     => $this -> input -> post ( 'blood-group', true ),
+                    'ph'              => $this -> input -> post ( 'ph', true ),
+                    'sugar'           => $this -> input -> post ( 'sugar', true ),
+                    'albumin'         => $this -> input -> post ( 'albumin', true ),
+                    'pus_cells'       => $this -> input -> post ( 'pus-cells', true ),
+                    'ova_cysts'       => $this -> input -> post ( 'ova-cysts', true ),
+                    'rbcs'            => $this -> input -> post ( 'rbcs', true ),
+                    'amphetamine'     => $this -> input -> post ( 'amphetamine', true ),
+                    'benzodiazepine'  => $this -> input -> post ( 'benzodiazepine', true ),
+                    'marijuana'       => $this -> input -> post ( 'marijuana', true ),
+                    'methamphetamine' => $this -> input -> post ( 'methamphetamine', true ),
+                    'anti_depressant' => $this -> input -> post ( 'anti-depressant', true ),
+                    'barbiturate'     => $this -> input -> post ( 'barbiturate', true ),
+                    'cocaine'         => $this -> input -> post ( 'cocaine', true ),
+                    'methadone'       => $this -> input -> post ( 'methadone', true ),
+                    'phencyclidine'   => $this -> input -> post ( 'phencyclidine', true ),
+                    'x_ray_chest'     => $this -> input -> post ( 'x-ray-chest', true ),
+                );
+                $id   = $this -> MedicalTestModel -> add_lab_investigation ( $info );
+                if ( $id > 0 ) {
+                    $this -> session -> set_flashdata ( 'response', 'Success! Medical test lab investigations added.' );
+                    return redirect ( base_url ( '/medical-tests/edit/' . $medical_test_id . '?tab=lab-investigation' ) );
+                }
+                else {
+                    $this -> session -> set_flashdata ( 'error', 'Error! Member type not added. Please try again' );
+                    return false;
+                }
             }
         }
         

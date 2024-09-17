@@ -49,6 +49,9 @@
                         
                         if ( $this -> input -> get ( 'tab' ) === 'lab-investigation' )
                             require_once 'edit/lab-investigation.php';
+
+                        if ( $this -> input -> get ( 'tab' ) === 'lab-investigation-custom' )
+                            require_once 'edit/lab-investigation-custom.php';
                     ?>
                 </div>
             </div>

@@ -1976,7 +1976,7 @@
                     echo 'start active'; ?>">
                     <a href="javascript:void(0);">
                         <i class="fa fa-cog"></i>
-                        <span class="title"> Medical test Settings </span>
+                        <span class="title"> Medical test Template </span>
                         <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu">

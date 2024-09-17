@@ -68,8 +68,10 @@ final class LabTemplateModel extends CI_Model
         $this->db->from('hmis_lab_template_rows');
         $this->db->where('template_id', $template_id);
         $query = $this->db->get();
-        return $query->result(); // Return all rows associated with the template as an array of objects
+        return $query->result(); 
     }
+
+
 
     // Update an existing template
     public function update_template($data, $id)

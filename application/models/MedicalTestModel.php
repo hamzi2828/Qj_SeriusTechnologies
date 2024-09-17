@@ -111,10 +111,32 @@
             $this -> db -> delete ( 'medical_test_lab_investigation', array ( 'medical_test_id' => $medical_test_id ) );
         }
         
+        public function delete_lab_investigation_custom($medical_test_id) {
+            // Delete rows from the custom table based on the medical_test_id
+            $this->db->where('medical_test_id', $medical_test_id);
+            $this->db->delete('hmis_medical_test_lab_investigation_custom');
+            
+            // Check if the deletion was successful
+            if ($this->db->affected_rows() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+
+        
         public function add_lab_investigation ( $info ) {
             $this -> db -> insert ( 'medical_test_lab_investigation', $info );
             return $this -> db -> insert_id ();
         }
+
+        public function add_custom_lab_investigation($data) {
+            $this->db->insert('hmis_medical_test_lab_investigation_custom', $data);
+            return $this->db->insert_id();
+        }
+        
+
         
         public function destroy ( $id ) {
             $this -> db -> delete ( 'medical_tests', array ( 'id' => $id ) );
@@ -173,5 +195,13 @@
         public function validate_cnic ( $cnic ) {
             $sql = $this -> db -> get_where ( 'medical_tests', array ( 'identity' => $cnic ) );
             return $sql -> num_rows () > 0;
+        }
+
+        public function get_template_rows_by_medical_test_id ($medical_test_id) {
+            $this->db->select('*');
+            $this->db->from('hmis_medical_test_lab_investigation_custom');
+            $this->db->where('medical_test_id', $medical_test_id);
+            $query = $this->db->get();
+            return $query->result();
         }
     }
