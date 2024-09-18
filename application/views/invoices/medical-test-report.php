@@ -687,6 +687,261 @@ mpdf-->
     </table>
 <?php endif; ?>
 
+
+
+
+
+
+
+
+<?php if ( !empty( $lab_investigation_custom ) ) : ?>
+    <?php
+    // Initialize an array to store unique headings
+    $uniqueHeadings = [];
+    ?>
+
+    <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 10px" cellpadding="0" cellspacing="0" border="1">
+        <tbody>
+        <tr>
+            <td width="50%">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2" border="1">
+                    <thead>
+                    <tr>
+                        <!-- Dynamically display the first heading name here -->
+                        <th align="center" colspan="2">
+                            <?php echo !empty($uniqueHeadings[0]) ? $uniqueHeadings[0] : 'HEADING 1'; ?>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    // Loop through the custom data to find the first unique heading and its rows
+                    foreach ($lab_investigation_custom as $custom) {
+                        // If the heading is unique and not already stored, add it
+                        if (!in_array($custom->header_name, $uniqueHeadings)) {
+                            $uniqueHeadings[] = $custom->header_name;
+                        }
+                        // Display the first unique heading and its rows
+                        if ($custom->header_name == $uniqueHeadings[0]) { ?>
+                            <tr>
+                                <td><?php echo $custom->row_name; ?></td>
+                                <td><?php echo $custom->row_value; ?></td>
+                            </tr>
+                        <?php }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </td>
+
+            <td width="50%" style="border-left: 1px solid #000000">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2" border="1">
+                    <thead>
+                    <tr>
+                        <!-- Dynamically display the second heading name here -->
+                        <th align="center" colspan="2">
+                            <?php echo !empty($uniqueHeadings[1]) ? $uniqueHeadings[1] : 'HEADING 2'; ?>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    // Loop again to display rows for the second unique heading
+                    foreach ($lab_investigation_custom as $custom) {
+                        // Display the second unique heading and its rows
+                        if (!empty($uniqueHeadings[1]) && $custom->header_name == $uniqueHeadings[1]) { ?>
+                            <tr>
+                                <td><?php echo $custom->row_name; ?></td>
+                                <td><?php echo $custom->row_value; ?></td>
+                            </tr>
+                        <?php }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    
+    <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 10px" cellpadding="0" cellspacing="0" border="1">
+        <tbody>
+        <tr>
+            <td width="50%">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2" border="1">
+                    <thead>
+                    <tr>
+                        <!-- Dynamically display the first heading name here -->
+                        <th align="center" colspan="2">
+                            <?php echo !empty($uniqueHeadings[2]) ? $uniqueHeadings[2] : 'HEADING 3'; ?>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    // Loop through the custom data to find the first unique heading and its rows
+                    foreach ($lab_investigation_custom as $custom) {
+                        // If the heading is unique and not already stored, add it
+                        if (!in_array($custom->header_name, $uniqueHeadings)) {
+                            $uniqueHeadings[] = $custom->header_name;
+                        }
+                        // Display the first unique heading and its rows
+                        if (!empty($uniqueHeadings[2]) && $custom->header_name == $uniqueHeadings[2]) { ?>
+                            <tr>
+                                <td><?php echo $custom->row_name; ?></td>
+                                <td><?php echo $custom->row_value; ?></td>
+                            </tr>
+                        <?php }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </td>
+
+            <td width="50%" style="border-left: 1px solid #000000">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2" border="1">
+                    <thead>
+                    <tr>
+                        <!-- Dynamically display the second heading name here -->
+                        <th align="center" colspan="2">
+                            <?php echo !empty($uniqueHeadings[3]) ? $uniqueHeadings[3] : 'HEADING 4'; ?>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    // Loop again to display rows for the second unique heading
+                    foreach ($lab_investigation_custom as $custom) {
+                        // Display the second unique heading and its rows
+                        if (!empty($uniqueHeadings[3]) && $custom->header_name == $uniqueHeadings[3]) { ?>
+                            <tr>
+                                <td><?php echo $custom->row_name; ?></td>
+                                <td><?php echo $custom->row_value; ?></td>
+                            </tr>
+                        <?php }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+    <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 0" cellpadding="0" cellspacing="0"
+           border="1">
+        <thead>
+        <tr>
+            <th align="center" colspan="2"> <?php echo !empty($uniqueHeadings[4]) ? $uniqueHeadings[4] : 'HEADING 5'; ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td width="50%">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2"
+                       border="1">
+                       <tbody>
+                        <?php
+                        // Initialize a counter for the rows
+                        $rowCount = 0;
+                        foreach ($lab_investigation_custom as $custom) {
+                            // Ensure the heading is unique and matches the fifth heading
+                            if (!in_array($custom->header_name, $uniqueHeadings)) {
+                                $uniqueHeadings[] = $custom->header_name;
+                            }
+                            // Check if the row belongs to the fifth heading
+                            if (!empty($uniqueHeadings[4]) && $custom->header_name == $uniqueHeadings[4]) {
+                                $rowCount++;
+                                // Display the first 5 rows in the left column
+                                if ($rowCount <= 5) { ?>
+                                    <tr>
+                                        <td><?php echo $custom->row_name; ?></td>
+                                        <td><?php echo $custom->row_value; ?></td>
+                                    </tr>
+                                <?php }
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </td>
+            
+            <td width="50%" style="border-left: 1px solid #000000">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2"
+                       border="1">
+                       <tbody>
+                        <?php
+                        // Initialize a counter for the rows
+                        $rowCount = 0;
+                        foreach ($lab_investigation_custom as $custom) {
+                            // Ensure the heading is unique and matches the fifth heading
+                            if (!in_array($custom->header_name, $uniqueHeadings)) {
+                                $uniqueHeadings[] = $custom->header_name;
+                            }
+                            // Check if the row belongs to the fifth heading
+                            if (!empty($uniqueHeadings[4]) && $custom->header_name == $uniqueHeadings[4]) {
+                                $rowCount++;
+                                // Display the first 5 rows in the left column
+                                if ($rowCount <= 5) { ?>
+                                    <tr>
+                                        <td><?php echo $custom->row_name; ?></td>
+                                        <td><?php echo $custom->row_value; ?></td>
+                                    </tr>
+                                <?php }
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+    <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 0" cellpadding="0" cellspacing="0"
+           border="1">
+        <thead>
+        <tr>
+            <th align="center" colspan="2"> <?php echo !empty($uniqueHeadings[5]) ? $uniqueHeadings[5] : 'HEADING 6'; ?></th>
+        </tr>
+        </thead>
+        <tbody>
+                    <?php
+                    // Loop through the custom data to find the first unique heading and its rows
+                    foreach ($lab_investigation_custom as $custom) {
+                        // If the heading is unique and not already stored, add it
+                        if (!in_array($custom->header_name, $uniqueHeadings)) {
+                            $uniqueHeadings[] = $custom->header_name;
+                        }
+                        // Display the first unique heading and its rows
+                        if (!empty($uniqueHeadings[5]) && $custom->header_name == $uniqueHeadings[5]) { ?>
+                            <tr>
+                            <td width="50%"><?php echo $custom->row_name; ?></td>
+                            <td width="50%"><?php echo $custom->row_value; ?></td>
+                            </tr>
+                        <?php }
+                    }
+                    ?>
+                    </tbody>
+    </table>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
 <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 15px" cellpadding="0" cellspacing="0"
        border="0">
     <tbody>

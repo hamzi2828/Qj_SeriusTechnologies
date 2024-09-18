@@ -3973,7 +3973,12 @@
             $data[ 'history' ]              = $this -> MedicalTestModel -> get_medical_test_history ( $id );
             $data[ 'physical_examination' ] = $this -> MedicalTestModel -> get_medical_test_physical_examination ( $id );
             if ($this->input->get('custom') == 'true') {
-                $data[ 'lab_investigation' ] = $this->MedicalTestModel->get_template_rows_by_medical_test_id($id);
+                $data[ 'lab_investigation_custom' ] = $this->MedicalTestModel->get_template_rows_by_medical_test_id($id);
+                        // echo "<pre>";
+                        // echo "Template Data:\n";
+                        // print_r(   $data[ 'lab_investigation_custom' ]  );
+                        // echo "</pre>";
+                        // exit;
             }
             else{
                 $data[ 'lab_investigation' ]    = $this -> MedicalTestModel -> get_medical_test_lab_investigation ( $id );
