@@ -698,6 +698,13 @@ mpdf-->
     <?php
     // Initialize an array to store unique headings
     $uniqueHeadings = [];
+
+    // Populate uniqueHeadings array from lab_investigation_custom
+    foreach ($lab_investigation_custom as $custom) {
+        if (!in_array($custom->header_name, $uniqueHeadings)) {
+            $uniqueHeadings[] = $custom->header_name;
+        }
+    }
     ?>
 
     <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 10px" cellpadding="0" cellspacing="0" border="1">
@@ -717,10 +724,6 @@ mpdf-->
                     <?php
                     // Loop through the custom data to find the first unique heading and its rows
                     foreach ($lab_investigation_custom as $custom) {
-                        // If the heading is unique and not already stored, add it
-                        if (!in_array($custom->header_name, $uniqueHeadings)) {
-                            $uniqueHeadings[] = $custom->header_name;
-                        }
                         // Display the first unique heading and its rows
                         if ($custom->header_name == $uniqueHeadings[0]) { ?>
                             <tr>
@@ -763,6 +766,7 @@ mpdf-->
         </tr>
         </tbody>
     </table>
+
 
 
     
@@ -912,6 +916,11 @@ mpdf-->
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <td width="50%">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2"
+                       border="1">
+                       <tbody>
                     <?php
                     // Loop through the custom data to find the first unique heading and its rows
                     foreach ($lab_investigation_custom as $custom) {
@@ -929,7 +938,21 @@ mpdf-->
                     }
                     ?>
                     </tbody>
+                </table>
+            </td>
+            
+            <td width="50%">
+                <table class="border-bottom-td" width="100%" style="border-collapse: collapse;" cellpadding="2"
+                       border="1">
+                
+                </table>
+            </td>
+        </tr>
+        </tbody>
     </table>
+
+
+
 <?php endif; ?>
 
 
