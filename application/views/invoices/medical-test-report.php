@@ -725,7 +725,7 @@ mpdf-->
                     // Loop through the custom data to find the first unique heading and its rows
                     foreach ($lab_investigation_custom as $custom) {
                         // Display the first unique heading and its rows
-                        if ($custom->header_name == $uniqueHeadings[0]) { ?>
+                        if ($custom->header_name == $uniqueHeadings[0] && !empty($custom->row_value)) { ?>
                             <tr>
                                 <td><?php echo $custom->row_name; ?></td>
                                 <td><?php echo $custom->row_value; ?></td>
@@ -752,7 +752,7 @@ mpdf-->
                     // Loop again to display rows for the second unique heading
                     foreach ($lab_investigation_custom as $custom) {
                         // Display the second unique heading and its rows
-                        if (!empty($uniqueHeadings[1]) && $custom->header_name == $uniqueHeadings[1]) { ?>
+                        if (!empty($uniqueHeadings[1]) && $custom->header_name == $uniqueHeadings[1] && !empty($custom->row_value)) { ?>
                             <tr>
                                 <td><?php echo $custom->row_name; ?></td>
                                 <td><?php echo $custom->row_value; ?></td>
@@ -788,11 +788,11 @@ mpdf-->
                     // Loop through the custom data to find the first unique heading and its rows
                     foreach ($lab_investigation_custom as $custom) {
                         // If the heading is unique and not already stored, add it
-                        if (!in_array($custom->header_name, $uniqueHeadings)) {
+                        if (!in_array($custom->header_name, $uniqueHeadings) && !empty($custom->row_value)) {
                             $uniqueHeadings[] = $custom->header_name;
                         }
                         // Display the first unique heading and its rows
-                        if (!empty($uniqueHeadings[2]) && $custom->header_name == $uniqueHeadings[2]) { ?>
+                        if (!empty($uniqueHeadings[2]) && $custom->header_name == $uniqueHeadings[2] && !empty($custom->row_value)) { ?>
                             <tr>
                                 <td><?php echo $custom->row_name; ?></td>
                                 <td><?php echo $custom->row_value; ?></td>
@@ -819,7 +819,7 @@ mpdf-->
                     // Loop again to display rows for the second unique heading
                     foreach ($lab_investigation_custom as $custom) {
                         // Display the second unique heading and its rows
-                        if (!empty($uniqueHeadings[3]) && $custom->header_name == $uniqueHeadings[3]) { ?>
+                        if (!empty($uniqueHeadings[3]) && $custom->header_name == $uniqueHeadings[3] && !empty($custom->row_value)) { ?>
                             <tr>
                                 <td><?php echo $custom->row_name; ?></td>
                                 <td><?php echo $custom->row_value; ?></td>
@@ -836,8 +836,7 @@ mpdf-->
 
 
 
-    <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 0" cellpadding="0" cellspacing="0"
-           border="1">
+    <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 10px" cellpadding="0" cellspacing="0" border="1">
         <thead>
         <tr>
             <th align="center" colspan="2"> <?php echo !empty($uniqueHeadings[4]) ? $uniqueHeadings[4] : 'HEADING 5'; ?></th>
@@ -854,14 +853,14 @@ mpdf-->
                         $rowCount = 0;
                         foreach ($lab_investigation_custom as $custom) {
                             // Ensure the heading is unique and matches the fifth heading
-                            if (!in_array($custom->header_name, $uniqueHeadings)) {
+                            if (!in_array($custom->header_name, $uniqueHeadings) && !empty($custom->row_value)) {
                                 $uniqueHeadings[] = $custom->header_name;
                             }
                             // Check if the row belongs to the fifth heading
-                            if (!empty($uniqueHeadings[4]) && $custom->header_name == $uniqueHeadings[4]) {
+                            if (!empty($uniqueHeadings[4]) && $custom->header_name == $uniqueHeadings[4] && !empty($custom->row_value)) {
                                 $rowCount++;
                                 // Display the first 5 rows in the left column
-                                if ($rowCount <= 5) { ?>
+                                if ($rowCount >= 0 && $rowCount <= 3) { ?>
                                     <tr>
                                         <td><?php echo $custom->row_name; ?></td>
                                         <td><?php echo $custom->row_value; ?></td>
@@ -887,10 +886,10 @@ mpdf-->
                                 $uniqueHeadings[] = $custom->header_name;
                             }
                             // Check if the row belongs to the fifth heading
-                            if (!empty($uniqueHeadings[4]) && $custom->header_name == $uniqueHeadings[4]) {
+                            if (!empty($uniqueHeadings[4]) && $custom->header_name == $uniqueHeadings[4] && !empty($custom->row_value)) {
                                 $rowCount++;
                                 // Display the first 5 rows in the left column
-                                if ($rowCount <= 5) { ?>
+                                if ($rowCount >= 4 && $rowCount <= 7) { ?>
                                     <tr>
                                         <td><?php echo $custom->row_name; ?></td>
                                         <td><?php echo $custom->row_value; ?></td>
@@ -929,7 +928,7 @@ mpdf-->
                             $uniqueHeadings[] = $custom->header_name;
                         }
                         // Display the first unique heading and its rows
-                        if (!empty($uniqueHeadings[5]) && $custom->header_name == $uniqueHeadings[5]) { ?>
+                        if (!empty($uniqueHeadings[5]) && $custom->header_name == $uniqueHeadings[5] && !empty($custom->row_value)) { ?>
                             <tr>
                             <td width="50%"><?php echo $custom->row_name; ?></td>
                             <td width="50%"><?php echo $custom->row_value; ?></td>
