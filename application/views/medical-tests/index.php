@@ -172,8 +172,11 @@
                                             <a class="btn purple" target="_blank"
                                                href="<?php echo base_url ( '/invoices/medical-test/' . $test -> id . '/?logo=false' ) ?>">Print</a>
 
-                                               <a class="btn purple" target="_blank"
-                                               href="<?php echo base_url ( '/invoices/medical-test/' . $test -> id . '/?custom=true' ) ?>">L-Print-C</a>
+                                            <a class="btn purple" target="_blank"
+                                            href="<?php echo base_url ( '/invoices/medical-test/' . $test -> id . '/?custom=true&logo=false' ) ?>">Print-C</a>
+                                            
+                                            <a class="btn purple" target="_blank"
+                                            href="<?php echo base_url ( '/invoices/medical-test/' . $test -> id . '/?custom=true&logo=true' ) ?>">L-Print-C</a>
 
                                         <?php endif; ?>
                                         
