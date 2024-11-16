@@ -75,7 +75,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 1</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_1" class="form-control" placeholder="Header Name 1">
                                 </th>
@@ -97,7 +97,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 2</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_2" class="form-control" placeholder="Header Name 2">
                                 </th>
@@ -119,7 +119,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 3</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_3" class="form-control" placeholder="Header Name 3">
                                 </th>
@@ -141,7 +141,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 4</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_4" class="form-control" placeholder="Header Name 4">
                                 </th>
@@ -163,7 +163,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 5</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_5" class="form-control" placeholder="Header Name 5">
                                 </th>
@@ -185,7 +185,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 6</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_6" class="form-control" placeholder="Header Name 6">
                                 </th>
@@ -244,7 +244,7 @@
     });
 
     // General function to add a row in a table section
-    function addRow(tableBodyId, rowName, rowValue, maxRows = 7) {
+    function addRow(tableBodyId, rowName, rowValue, maxRows = 100) {
         var tableBody = document.getElementById(tableBodyId);
         var rows = tableBody.getElementsByTagName('tr');
 

@@ -151,6 +151,8 @@ final class MedicalTestTemplates extends CI_Controller {
     
     public function edit_template($id)
     {
+
+
         $title = site_name . ' - Edit Medical Test Template';
         $this->header($title);
         $this->sidebar();
@@ -170,7 +172,7 @@ final class MedicalTestTemplates extends CI_Controller {
         foreach ($rows as $row) {
             $groupedRows[$row->header_id][] = $row;
         }
-    
+     
         // Prepare data to pass to the view
         $data = [
             'template' => $template,

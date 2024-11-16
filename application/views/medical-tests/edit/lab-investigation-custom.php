@@ -49,7 +49,7 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                    <th><strong>Tittle</strong></th>
                                         <th colspan="2">
                                             <input type="text" name="header_name_<?php echo $sectionNumber; ?>" class="form-control" 
                                                    id="header_name_<?php echo $sectionNumber; ?>" 

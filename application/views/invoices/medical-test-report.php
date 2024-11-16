@@ -835,7 +835,12 @@ mpdf-->
     </table>
 
 
-
+  <!--  heading 5  -->
+    <?php 
+    $headingToDisplay = !empty($uniqueHeadings[4]) ? $uniqueHeadings[4] : 'HEADING 5';  
+   
+    if (!$headingToDisplay == 'HEADING 5') {
+    ?>
     <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 10px" cellpadding="0" cellspacing="0" border="1">
         <thead>
         <tr>
@@ -904,9 +909,16 @@ mpdf-->
         </tr>
         </tbody>
     </table>
-
-
-
+    <?php 
+    }
+    ?>
+    
+    <!--  heading 6  -->
+  <?php 
+    $headingToDisplay = !empty($uniqueHeadings[5]) ? $uniqueHeadings[5] : 'HEADING 6';  
+   
+    if (!$headingToDisplay == 'HEADING 6') {
+    ?>
     <table width="100%" style="font-size: 8pt; border-collapse: separate; margin-top: 0" cellpadding="0" cellspacing="0"
            border="1">
         <thead>
@@ -949,7 +961,9 @@ mpdf-->
         </tr>
         </tbody>
     </table>
-
+    <?php 
+    }
+    ?>
 
 
 <?php endif; ?>

@@ -110,64 +110,81 @@
                                 <label for="anti-hcv">Anti HCV</label>
                             </td>
                             <td>
+                            
                                 <select name="anti-hcv" id="anti-hcv" class="form-control select2me">
-                                    <option value="Negative" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> anti_hcv === 'Negative' ) ? 'selected="selected"' : '' ?>>
+                                
+                                    <option value="Negative" 
+                                        <?php echo (!empty($lab_investigation) && $lab_investigation->anti_hcv === 'Negative') ? 'selected="selected"' : ''; ?>>
                                         Negative
                                     </option>
-                                    <option value="POSITIVE*" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> anti_hcv === 'Positive' ) ? 'selected="selected"' : '' ?>>
+                                    <option value="POSITIVE*" 
+                                        <?php echo (!empty($lab_investigation) && $lab_investigation->anti_hcv === 'POSITIVE*') ? 'selected="selected"' : ''; ?>>
                                         POSITIVE*
                                     </option>
                                 </select>
                             </td>
                         </tr>
+
                         
                         <tr>
-                            <td width="40%">
-                                <label for="hbsag">HbsAg</label>
-                            </td>
-                            <td>
-                                <select name="hbsag" id="hbsag" class="form-control select2me">
-                                    <option value="Negative" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> hbsag === 'Negative' ) ? 'selected="selected"' : '' ?>>
-                                        Negative
-                                    </option>
-                                    <option value="POSITIVE*" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> hbsag === 'Positive' ) ? 'selected="selected"' : '' ?>>
-                                        POSITIVE*
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
+                        <td width="40%">
+                            <label for="hbsag">HbsAg</label>
+                        </td>
+                        <td>
+                            <select name="hbsag" id="hbsag" class="form-control select2me">
+                                 
+                                <option value="Negative" 
+                                    <?php echo (!empty($lab_investigation) && $lab_investigation->hbsag === 'Negative') ? 'selected="selected"' : ''; ?>>
+                                    Negative
+                                </option>
+                                <option value="POSITIVE*" 
+                                    <?php echo (!empty($lab_investigation) && $lab_investigation->hbsag === 'POSITIVE*') ? 'selected="selected"' : ''; ?>>
+                                    POSITIVE*
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+
                         
-                        <tr>
-                            <td width="40%">
-                                <label for="hiv">HIV</label>
-                            </td>
-                            <td>
-                                <select name="hiv" id="hiv" class="form-control select2me">
-                                    <option value="Negative" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> hiv === 'Negative' ) ? 'selected="selected"' : '' ?>>
-                                        Negative
-                                    </option>
-                                    <option value="POSITIVE*" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> hiv === 'Positive' ) ? 'selected="selected"' : '' ?>>
-                                        POSITIVE*
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
+                    <tr>
+                    <td width="40%">
+                        <label for="hiv">HIV</label>
+                    </td>
+                    <td>
+                        <select name="hiv" id="hiv" class="form-control select2me">
+                             
+                            <option value="Negative" 
+                                <?php echo (!empty($lab_investigation) && $lab_investigation->hiv === 'Negative') ? 'selected="selected"' : ''; ?>>
+                                Negative
+                            </option>
+                            <option value="POSITIVE*" 
+                                <?php echo (!empty($lab_investigation) && $lab_investigation->hiv === 'POSITIVE*') ? 'selected="selected"' : ''; ?>>
+                                POSITIVE*
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
                         
-                        <tr>
-                            <td width="40%">
-                                <label for="vdrl">VDRL</label>
-                            </td>
-                            <td>
-                                <select name="vdrl" id="vdrl" class="form-control select2me">
-                                    <option value="Negative" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> vdrl === 'Negative' ) ? 'selected="selected"' : '' ?>>
-                                        Negative
-                                    </option>
-                                    <option value="POSITIVE*" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> vdrl === 'Positive' ) ? 'selected="selected"' : '' ?>>
-                                        POSITIVE*
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
+                <tr>
+                    <td width="40%">
+                        <label for="vdrl">VDRL</label>
+                    </td>
+                    <td>
+                        <select name="vdrl" id="vdrl" class="form-control select2me">
+                            
+                            <option value="Negative" 
+                                <?php echo (!empty($lab_investigation) && $lab_investigation->vdrl === 'Negative') ? 'selected="selected"' : ''; ?>>
+                                Negative
+                            </option>
+                            <option value="POSITIVE*" 
+                                <?php echo (!empty($lab_investigation) && $lab_investigation->vdrl === 'POSITIVE*') ? 'selected="selected"' : ''; ?>>
+                                POSITIVE*
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+
                         
                         <tr>
                             <td width="40%">
@@ -175,15 +192,19 @@
                             </td>
                             <td>
                                 <select name="tuberculosis" id="tuberculosis" class="form-control select2me">
-                                    <option value="Negative" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> tuberculosis === 'Negative' ) ? 'selected="selected"' : '' ?>>
+                                     
+                                    <option value="Negative" 
+                                        <?php echo (!empty($lab_investigation) && $lab_investigation->tuberculosis === 'Negative') ? 'selected="selected"' : ''; ?>>
                                         Negative
                                     </option>
-                                    <option value="POSITIVE*" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> tuberculosis === 'Positive' ) ? 'selected="selected"' : '' ?>>
+                                    <option value="POSITIVE*" 
+                                        <?php echo (!empty($lab_investigation) && $lab_investigation->tuberculosis === 'POSITIVE*') ? 'selected="selected"' : ''; ?>>
                                         POSITIVE*
                                     </option>
                                 </select>
                             </td>
                         </tr>
+
                         
                         <tr>
                             <td width="40%">
@@ -191,7 +212,7 @@
                             </td>
                             <td>
                                 <select name="blood-group" id="blood-group" class="form-control select2me">
-                                    <option>Select</option>
+                                     
                                     <option value="A-" <?php echo ( !empty( $lab_investigation ) && $lab_investigation -> blood_group === 'A-' ) ? 'selected="selected"' : '' ?>>
                                         A-
                                     </option>

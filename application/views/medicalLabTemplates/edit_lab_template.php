@@ -68,6 +68,7 @@
         <input type="hidden" name="template_id" value="<?php echo isset($template->id) ? $template->id : ''; ?>">
 
         <div class="form-body" style="background: transparent;">
+            <h2>Template Tittle</h2>
             <h3>
                 <input placeholder="Template Name" type="text" name="template_name" class="form-control" value="<?php echo isset($template->template_name) ? $template->template_name : ''; ?>" autofocus="autofocus" required>
             </h3>
@@ -78,7 +79,8 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th><strong>Tittle: 1</strong></th>
+
                                 <th colspan="2">
                                     <input type="text" name="header_name_1" class="form-control" placeholder="Header Name 1" value="<?php echo isset($template->header_name_1) ? $template->header_name_1 : ''; ?>">
                                 </th>
@@ -115,7 +117,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 2</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_2" class="form-control" placeholder="Header Name 2" value="<?php echo isset($template->header_name_2) ? $template->header_name_2 : ''; ?>">
                                 </th>
@@ -152,7 +154,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 3</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_3" class="form-control" placeholder="Header Name 3" value="<?php echo isset($template->header_name_3) ? $template->header_name_3 : ''; ?>">
                                 </th>
@@ -189,7 +191,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 4</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_4" class="form-control" placeholder="Header Name 4" value="<?php echo isset($template->header_name_4) ? $template->header_name_4 : ''; ?>">
                                 </th>
@@ -226,7 +228,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 5</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_5" class="form-control" placeholder="Header Name 5" value="<?php echo isset($template->header_name_5) ? $template->header_name_5 : ''; ?>">
                                 </th>
@@ -263,7 +265,7 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                            <th><strong>Tittle: 6</strong></th>
                                 <th colspan="2">
                                     <input type="text" name="header_name_6" class="form-control" placeholder="Header Name 6" value="<?php echo isset($template->header_name_6) ? $template->header_name_6 : ''; ?>">
                                 </th>
@@ -336,7 +338,7 @@
     });
 
     // General function to add a row in a table section
-    function addRow(tableBodyId, rowName, rowValue, maxRows = 7) {
+    function addRow(tableBodyId, rowName, rowValue, maxRows = 100) {
         var tableBody = document.getElementById(tableBodyId);
         var rows = tableBody.getElementsByTagName('tr');
 

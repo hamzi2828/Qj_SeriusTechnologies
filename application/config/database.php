@@ -78,7 +78,7 @@
         'hostname'     => 'localhost',
         'username'     => 'root',
         'password'     => '',
-        'database'     => 'qj_database',
+        'database'     => 'qj_dev',
         'dbdriver'     => 'mysqli',
         'dbprefix'     => 'hmis_',
         'pconnect'     => FALSE,

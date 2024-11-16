@@ -473,7 +473,7 @@
     $route[ 'invoices/medical-test-ticket/(:any)' ]                      = 'Invoices/medical_test_ticket/$1';
     $route[ 'medical-test-settings/oep/index' ]                          = 'MedicalTestSettings/all_oep';
     $route[ 'medical-test-settings/oep/create' ]                         = 'MedicalTestSettings/add_oep';
-    $route[ 'medical-test-settings/oep/edit/(:any)' ]                    = 'MedicalTestTemplates/edit_template/$1';
+    $route[ 'medical-test-settings/oep/edit/(:any)' ]                    = 'MedicalTestSettings/edit_oep/$1';
     $route[ 'medical-test-settings/oep/destroy/(:any)' ]                 = 'MedicalTestSettings/delete_oep/$1';
    
 
@@ -484,7 +484,7 @@
     $route['medical-test-settings/template/edit/(:any)' ]                 = 'MedicalTestTemplates/edit_template/$1';
     $route['medical-test/template/delete/(:any)']                         = 'MedicalTestTemplates/delete_template/$1';
     $route['medical-test-settings/template/update']                       = 'MedicalTestTemplates/update_template';
-    $route['medical-test/template/duplicate/(:any)']                       = 'MedicalTestTemplates/duplicate_template/$1';
+    $route['medical-test/template/duplicate/(:any)']                      = 'MedicalTestTemplates/duplicate_template/$1';
 
 
 
