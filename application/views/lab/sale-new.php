@@ -109,7 +109,7 @@
                                 <label>Discount(Flat)</label>
                                 <input type="text" name="flat-discount" required="required" value="0"
                                        class="form-control"
-                                       onchange="calculate_flat_lab_sale_discount()" id="flat-discount">
+                                       onchange="calculate_flat_lab_sale_discount()" id="flat-discount"> 
                             </div>
                             <div class="col-lg-4 col-lg-offset-8">
                                 <label>Net Price</label>

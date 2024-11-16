@@ -13,13 +13,19 @@
         <input type="text" class="form-control price" readonly="readonly" name="price[]" value="<?php echo $price ?>">
     </div>
     
-    <div class="form-group col-lg-2" style="padding-left: 0;">
+    <div class="form-group col-lg-2" style="padding-left: 0;"> 
         <label>TAT</label>
         <input type="text" class="form-control tat-<?php echo $row ?>" value="<?php echo $test -> tat ?>" readonly="readonly">
     </div>
     
-    <div class="col-lg-3">
+    <!-- <div class="col-lg-3">
         <label><strong>Collection Date & Time</strong></label>
         <input type="datetime-local" name="report-collection-date-time[]" class="form-control">
+    </div> -->
+
+    <div class="col-lg-3">
+        <label><strong>Collection Date & Time</strong></label>
+        <input type="datetime-local" name="report-collection-date-time[]" class="form-control"
+               value="<?php echo isset($default_datetime) ? $default_datetime : '' ?>">
     </div>
 </div>

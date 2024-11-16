@@ -1,4 +1,4 @@
-let path = 'http://localhost/Qj_SeriusTechnologies/';
+let path = 'http://localhost/qj_siristechnologies/';
 
 jQuery ( window ).load ( function () {
     jQuery ( '.loader' ).hide ();

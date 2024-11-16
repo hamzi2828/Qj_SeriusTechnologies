@@ -77,15 +77,60 @@ function load_lab_test_options ( patient_id = 0 ) {
     } )
 }
 
-function load_sale_test ( test_id ) {
+// function load_sale_test ( test_id ) {
+//     let iSum = 0;
+//     let disc = 0;
+//     let csrf_token = jQuery ( '#csrf_token' ).val ();
+//     let panel_id = jQuery ( '#panel_id' ).val ();
+//     let added = jQuery ( '#added' ).val ();
+//     added = parseInt ( added ) + 1;
+//     jQuery ( '#added' ).val ( added )
+//     request = jQuery.ajax ( {
+//         url: path + 'lab/load_sale_test',
+//         type: 'POST',
+//         data: {
+//             hmis_token: csrf_token,
+//             test_id: test_id,
+//             panel_id: panel_id,
+//             row: added,
+//         },
+//         beforeSend: function () {
+//             jQuery ( '.loader' ).show ();
+//         },
+//         success: function ( response ) {
+//             jQuery ( '.add-more' ).prepend ( response );
+//             jQuery ( '.test-option-' + test_id ).prop ( 'disabled', true );
+//             jQuery ( '.loader' ).hide ();
+//             jQuery ( '.price' ).each ( function () {
+//                 if ( jQuery ( this ).val () != '' && jQuery ( this ).val () >= 0 )
+//                     iSum = iSum + parseFloat ( jQuery ( this ).val () );
+//             } );
+//             jQuery ( '.total' ).val ( iSum.toFixed ( 2 ) );
+//             disc = jQuery ( '#discount' ).val ();
+//             var net = iSum - ( iSum * ( disc / 100 ) );
+//             jQuery ( '.net-price' ).val ( net.toFixed ( 2 ) );
+//             jQuery ( '#lab-tests-sale' ).select2 ( 'open' );
+//         },
+//         error: function ( jqXHr, exception ) {
+//             alert ( jqXHr );
+//             jQuery ( '#sales-btn' ).prop ( 'disabled', true );
+//             jQuery ( '.loader' ).hide ();
+//             jQuery ( '#lab-tests-sale' ).select2 ( 'open' );
+//         }
+//     } )
+// }
+
+function load_sale_test(test_id) {
     let iSum = 0;
     let disc = 0;
-    let csrf_token = jQuery ( '#csrf_token' ).val ();
-    let panel_id = jQuery ( '#panel_id' ).val ();
-    let added = jQuery ( '#added' ).val ();
-    added = parseInt ( added ) + 1;
-    jQuery ( '#added' ).val ( added )
-    request = jQuery.ajax ( {
+    let csrf_token = jQuery('#csrf_token').val();
+    let panel_id = jQuery('#panel_id').val();
+    let added = parseInt(jQuery('#added').val()) + 1;
+    let defaultDateTime = jQuery('input[name="report-collection-date-time[]"]:first').val() || ''; // Default DateTime
+
+    jQuery('#added').val(added);
+
+    request = jQuery.ajax({
         url: path + 'lab/load_sale_test',
         type: 'POST',
         data: {
@@ -93,32 +138,47 @@ function load_sale_test ( test_id ) {
             test_id: test_id,
             panel_id: panel_id,
             row: added,
+            default_datetime: defaultDateTime // Pass default datetime to the backend
         },
         beforeSend: function () {
-            jQuery ( '.loader' ).show ();
+            jQuery('.loader').show();
         },
-        success: function ( response ) {
-            jQuery ( '.add-more' ).prepend ( response );
-            jQuery ( '.test-option-' + test_id ).prop ( 'disabled', true );
-            jQuery ( '.loader' ).hide ();
-            jQuery ( '.price' ).each ( function () {
-                if ( jQuery ( this ).val () != '' && jQuery ( this ).val () >= 0 )
-                    iSum = iSum + parseFloat ( jQuery ( this ).val () );
-            } );
-            jQuery ( '.total' ).val ( iSum.toFixed ( 2 ) );
-            disc = jQuery ( '#discount' ).val ();
-            var net = iSum - ( iSum * ( disc / 100 ) );
-            jQuery ( '.net-price' ).val ( net.toFixed ( 2 ) );
-            jQuery ( '#lab-tests-sale' ).select2 ( 'open' );
+        success: function (response) {
+            // Prepend the new test row
+            jQuery('.add-more').prepend(response);
+
+            // Disable the test option to prevent re-selection
+            jQuery('.test-option-' + test_id).prop('disabled', true);
+
+            // Hide the loader
+            jQuery('.loader').hide();
+
+            // Update the total price
+            jQuery('.price').each(function () {
+                let priceValue = parseFloat(jQuery(this).val()) || 0;
+                if (priceValue >= 0) iSum += priceValue;
+            });
+            jQuery('.total').val(iSum.toFixed(2));
+
+            // Apply discount
+            disc = parseFloat(jQuery('#discount').val()) || 0;
+            let net = iSum - (iSum * (disc / 100));
+            jQuery('.net-price').val(net.toFixed(2));
+
+            // Re-open the select2 dropdown
+            jQuery('#lab-tests-sale').select2('open');
         },
-        error: function ( jqXHr, exception ) {
-            alert ( jqXHr );
-            jQuery ( '#sales-btn' ).prop ( 'disabled', true );
-            jQuery ( '.loader' ).hide ();
-            jQuery ( '#lab-tests-sale' ).select2 ( 'open' );
+        error: function (jqXHR, exception) {
+            alert('Error: Unable to load the test.');
+            console.error(jqXHR);
+            jQuery('#sales-btn').prop('disabled', true);
+            jQuery('.loader').hide();
+            jQuery('#lab-tests-sale').select2('open');
         }
-    } )
+    });
 }
+
+
 
 function get_patient_by_lab_sale_id_and_test_type ( id, section_id = null, table = '' ) {
     if ( parseFloat ( id ) > 0 ) {
