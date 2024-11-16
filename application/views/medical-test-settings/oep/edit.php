@@ -56,7 +56,12 @@
                                 <input type="text" name="contact" class="form-control" id="contact"
                                        value="<?php echo set_value ( 'contact', $oep -> contact ) ?>">
                             </div>
-                            
+                            <div class="form-group col-lg-3">
+                                <label for="price">Price</label>
+                                <input type="number" name="price" class="form-control" id="price" step="0.01"
+                                    value="<?php echo set_value('price', $oep->price) ?>" required="required">
+                            </div>
+
                             <div class="form-group col-lg-12 mb-0">
                                 <label for="address">Address</label>
                                 <textarea name="address" class="form-control" rows="5" id="address"

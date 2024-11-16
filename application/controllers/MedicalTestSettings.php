@@ -59,6 +59,7 @@
                 'representative' => $this -> input -> post ( 'representative', true ),
                 'contact'        => $this -> input -> post ( 'contact', true ),
                 'address'        => $this -> input -> post ( 'address', true ),
+                'price'          => $this->input->post('price', true),
             );
             $id   = $this -> OEPModel -> add ( $info );
             if ( $id > 0 ) {
@@ -92,6 +93,7 @@
                 'representative' => $this -> input -> post ( 'representative', true ),
                 'contact'        => $this -> input -> post ( 'contact', true ),
                 'address'        => $this -> input -> post ( 'address', true ),
+                'price'          => $this->input->post('price', true),
             );
             $this -> OEPModel -> edit ( $info, $id );
             $this -> session -> set_flashdata ( 'response', 'Success! OEP updated.' );

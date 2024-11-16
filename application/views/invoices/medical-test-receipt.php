@@ -149,16 +149,28 @@ mpdf-->
                     <td width="30%" align="left">
                         <?php echo date_setter ( $test -> created_at, 5 ) ?>
                     </td>
+                    
                 </tr>
-                
+
                 <tr>
                     <td width="20%" align="left">
-                        <strong>Printed By:</strong>
+                    <strong>Printed By:</strong>
                     </td>
-                    <td align="left" colspan="3">
-                        <?php echo $user -> name . ' | ' . date ( 'm/d/Y H:i:s A' ) ?>
+                    <td width="30%" align="left">
+                    <?php echo $user -> name . ' | ' . date ( 'm/d/Y H:i:s A' ) ?>
                     </td>
+                    
+                    <td width="20%" align="left">
+                    <strong>Payment Method:</strong>
+                    </td>
+                    <td width="30%" align="left">
+                    <?php echo !empty($test->payment_method) ? ucwords($test->payment_method) : 'Not Specified'; ?>
+                    </td>
+                    
                 </tr>
+
+                
+ 
                 </tbody>
             </table>
         </td>

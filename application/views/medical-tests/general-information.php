@@ -9,25 +9,37 @@
             <div class="row">
                 <div class="col-md-10">
                     <div class="row">
-                        <div class="col-lg-4 form-group">
-                            <label for="oep-id">OEP</label>
-                            <select name="oep-id" class="form-control select2me" id="oep-id"
-                                    required="required"
-                                    data-placeholder="Select">
-                                <option></option>
-                                <?php
-                                    if ( count ( $oeps ) > 0 ) {
-                                        foreach ( $oeps as $oep ) {
-                                            ?>
-                                            <option value="<?php echo $oep -> id ?>" <?php echo $this -> input -> post ( 'oep-id' ) === $oep -> id ? 'selected="selected"' : '' ?>>
-                                                <?php echo $oep -> name ?>
-                                            </option>
-                                            <?php
-                                        }
-                                    }
-                                ?>
-                            </select>
-                        </div>
+  
+
+                    
+                    <div class="col-lg-4 form-group">
+                        <label for="oep-id">OEP</label>
+                        <select name="oep-id" class="form-control select2me" id="oep-id" required="required" data-placeholder="Select">
+                            <option value="">Select OEP</option>
+                            <?php
+                            if (count($oeps) > 0) {
+                                foreach ($oeps as $oep) {
+                                    ?>
+                                    <option value="<?php echo $oep->id; ?>" data-price="<?php echo $oep->price; ?>">
+                                        <?php echo $oep->name; ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 form-group">
+                        <label for="oep-price">OEP Price</label>
+                        <input type="text" id="oep-price" class="form-control" readonly="readonly" placeholder="Price will be displayed here" />
+                    </div>
+
+
+
+
+
+
                         
                         <div class="col-lg-4 form-group">
                             <label for="name">Name</label>
@@ -158,6 +170,20 @@
                             <input type="text" name="oep" class="form-control" required="required" id="oep"
                                    value="<?php echo set_value ( 'oep' ) ?>">
                         </div>
+
+                        <div class="col-lg-4 form-group">
+                            <label for="payment-method">Payment Method</label>
+                            <select name="payment-method" id="payment-method" class="form-control" required>
+                                <option value="" disabled selected>Select Payment Method</option>
+                                <option value="cash">Cash</option>
+                                <option value="panel">Panel</option>
+                            </select>
+                            <small class="text-danger" id="payment-method-error" style="display: none;">
+                                Please select a payment method.
+                            </small>
+                        </div>
+
+
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -205,3 +231,37 @@
         </div>
     </form>
 </div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('Page loaded and script initialized.');
+
+        const oepDropdown = $('#oep-id'); // Use jQuery for Select2 compatibility
+        const priceInput = $('#oep-price'); // Get the input field for displaying the price
+
+        // Initialize Select2
+        oepDropdown.select2();
+
+        // Handle change event
+        oepDropdown.on('change', function () {
+            const selectedOption = $(this).find('option:selected'); // Get the selected option
+            const price = selectedOption.data('price'); // Use .data() to fetch the data-price attribute
+
+            // console.log('Selected option:', selectedOption);
+            // console.log('Selected value:', selectedOption.val());
+            // console.log('Selected price:', price);
+
+            if (selectedOption.val()) {
+                if (price) {
+                    priceInput.val(price); // Set the price in the read-only input
+                } else {
+                    priceInput.val('No price available'); // Handle missing price
+                }
+            } else {
+                priceInput.val(''); // Clear the input field if no valid OEP is selected
+            }
+        });
+    });
+</script>

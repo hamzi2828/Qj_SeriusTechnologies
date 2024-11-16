@@ -159,6 +159,31 @@
                                 </option>
                             </select>
                         </div>
+
+                        <div class="col-lg-3 form-group">
+                                <label for="payment-method">Payment Method</label>
+                                <select name="payment-method" id="payment-method" class="form-control" required>
+                                    <option value="cash" <?php echo $test->payment_method === 'cash' ? 'selected' : ''; ?>>Cash</option>
+                                    <option value="panel" <?php echo $test->payment_method === 'panel' ? 'selected' : ''; ?>>Panel</option>
+                                </select>
+                            </div>
+
+
+                            <?php
+                        // Ensure the model is loaded
+                        $this->load->model('MedicalTestModel'); 
+
+                        // Call the function and pass the oep_id
+                        $oep_details = $this->MedicalTestModel->get_details_of_oep_by_id($test->oep_id); 
+                    ?>
+
+                    <div class="col-lg-3 form-group">
+                        <label for="oep-price">OEP Price</label>
+                        <input type="text" name="oep-price" id="oep-price" class="form-control" readonly="readonly"
+                            value="<?php echo isset($oep_details->price) ? $oep_details->price : 'No price available'; ?>"
+                            placeholder="Price will be displayed here">
+                    </div>
+
                     </div>
                 </div>
                 <div class="col-md-2">

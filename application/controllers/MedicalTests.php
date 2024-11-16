@@ -82,7 +82,7 @@
             $data[ 'oeps' ]      = $this -> OEPModel -> all ();
             $this -> load -> view ( '/medical-tests/add', $data );
             $this -> footer ();
-        }
+        } 
         
         public function add_general_info () {
             $this -> form_validation -> set_rules ( 'oep-id', 'oep-id', 'required|trim|min_length[1]|xss_clean' );
@@ -119,6 +119,7 @@
                     'oep'            => $this -> input -> post ( 'oep', true ),
                     'image'          => upload_files ( 'image' ),
                     'image_data'     => $this -> input -> post ( 'image-data' ),
+                    'payment_method' => $this->input->post('payment-method', true),
                 );
                 $id   = $this -> MedicalTestModel -> add ( $info );
                 if ( $id > 0 ) {
@@ -212,6 +213,7 @@
                     'spec_received'  => date ( 'Y-m-d H:i:s', strtotime ( $this -> input -> post ( 'spec', true ) ) ),
                     'oep'            => $this -> input -> post ( 'oep', true ),
                     'fit'            => $this -> input -> post ( 'fit', true ),
+                    'payment_method' => $this->input->post('payment-method', true),
                 );
                 
                 if ( !empty( trim ( $image_data ) ) )
@@ -243,6 +245,7 @@
                 'allergy'                         => $this -> input -> post ( 'allergy', true ),
                 'diabetes'                        => $this -> input -> post ( 'diabetes', true ),
                 'others'                          => $this -> input -> post ( 'others', true ),
+                
             );
             $id   = $this -> MedicalTestModel -> upsert_history ( $info );
             if ( $id > 0 ) {

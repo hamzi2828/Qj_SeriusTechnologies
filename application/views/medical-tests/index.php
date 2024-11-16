@@ -86,6 +86,8 @@
                         <th> Country to Visit</th>
                         <th> Spec. Received</th>
                         <th> OEP/Ref By</th>
+                        <th> Payment Methods</th>
+                        <th> Payments</th>
                         <th> Status</th>
                         <th> Date Added</th>
                         <th> Actions</th>
@@ -134,6 +136,25 @@
                                     <td><?php echo !empty( $country ) ? $country -> title : '-' ?></td>
                                     <td><?php echo date_setter ( $test -> spec_received ) ?></td>
                                     <td><?php echo $test -> oep ?></td>
+                                    <td>
+                                        <?php 
+                                        echo !empty($test->payment_method) ? ucwords($test->payment_method) : 'Not Specified'; 
+                                        ?>
+                                    </td>
+                                    <td>
+                                            <?php 
+                                            // Ensure the model is loaded
+                                            $this->load->model('MedicalTestModel'); 
+
+                                            // Fetch the details for the OEP
+                                            $oep_details = $this->MedicalTestModel->get_details_of_oep_by_id($test->oep_id); 
+
+                                            // Display the price or a fallback message
+                                            echo isset($oep_details->price) ? $oep_details->price : 'Price not available';
+                                            ?>
+                                        </td>
+
+
                                     <td>
                                         <?php
                                             if ( $test -> fit === '0' )

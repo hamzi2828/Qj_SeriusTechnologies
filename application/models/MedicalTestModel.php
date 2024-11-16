@@ -64,6 +64,14 @@
             $this -> db -> insert ( 'medical_tests', $info );
             return $this -> db -> insert_id ();
         }
+
+        public function get_details_of_oep_by_id($oep_id)
+            {
+                $this->db->where('id', $oep_id);
+                $query = $this->db->get('hmis_oep'); 
+                return $query->row(); 
+            }
+
         
         public function get_medical_test ( $id ) {
             $test = $this -> db -> get_where ( 'medical_tests', array ( 'id' => $id ) );
