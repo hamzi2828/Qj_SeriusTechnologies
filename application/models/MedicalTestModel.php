@@ -160,6 +160,7 @@
             $start_date = $this -> input -> get ( 'start-date' );
             $end_date   = $this -> input -> get ( 'end-date' );
             $oep_id     = $this -> input -> get ( 'oep-id' );
+            $payment_method = $this->input->get('payment-method');
             $search     = false;
             
             $tests = $this -> db -> select ( '*' ) -> from ( 'medical_tests' );
@@ -174,6 +175,11 @@
             if ( !empty( trim ( $oep_id ) ) ) {
                 $search = true;
                 $tests -> where ( "oep_id=$oep_id" );
+            }
+           
+            if (!empty(trim($payment_method))) {
+                $search = true;
+                $tests->where("payment_method", $payment_method);
             }
             
             $tests = $tests -> get ();

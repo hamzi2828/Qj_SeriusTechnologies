@@ -107,6 +107,7 @@ mpdf-->
         <th align="left"> Country to Visit</th>
         <th align="left"> Spec. Received</th>
         <th align="left"> OEP/Ref By</th>
+        <th align="left"> Payment Method</th>
         <th align="left"> Status</th>
     </tr>
     </thead>
@@ -151,7 +152,9 @@ mpdf-->
                     </td>
                     <td><?php echo !empty( $country ) ? $country -> title : '-' ?></td>
                     <td><?php echo date_setter ( $test -> spec_received ) ?></td>
+                    
                     <td><?php echo $test -> oep ?></td>
+                    <td><?php echo ucwords ( $test -> payment_method ) ?></td>
                     <td>
                         <?php
                             if ( $test -> fit === '1' )

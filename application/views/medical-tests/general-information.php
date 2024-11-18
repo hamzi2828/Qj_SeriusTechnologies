@@ -171,17 +171,17 @@
                                    value="<?php echo set_value ( 'oep' ) ?>">
                         </div>
 
-                        <div class="col-lg-4 form-group">
+                        <div class="col-lg-3 form-group">
                             <label for="payment-method">Payment Method</label>
-                            <select name="payment-method" id="payment-method" class="form-control" required>
-                                <option value="" disabled selected>Select Payment Method</option>
+                            <select name="payment-method" id="payment-method" class="form-control select2me" required>
+                            <option></option>
                                 <option value="cash">Cash</option>
                                 <option value="panel">Panel</option>
                             </select>
-                            <small class="text-danger" id="payment-method-error" style="display: none;">
-                                Please select a payment method.
-                            </small>
+
                         </div>
+
+
 
 
                     </div>
