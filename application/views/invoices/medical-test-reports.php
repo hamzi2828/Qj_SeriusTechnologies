@@ -85,86 +85,112 @@ mpdf-->
        border="0">
     <tbody>
     <tr>
-        <td align="right">
-            <strong>Search Criteria:</strong>
-            <?php echo date ( 'd-m-Y', strtotime ( $this -> input -> get ( 'start-date' ) ) ) ?> -
-            <?php echo date ( 'd-m-Y', strtotime ( $this -> input -> get ( 'end-date' ) ) ) ?>
-        </td>
+    <td align="right">
+    <strong>Search Criteria:</strong>
+    <?php 
+        // Display the date range
+        if (!empty($this->input->get('start-date')) && !empty($this->input->get('end-date'))) {
+            echo date('d-m-Y', strtotime($this->input->get('start-date'))) . ' - ' . date('d-m-Y', strtotime($this->input->get('end-date')));
+        } else {
+            echo 'No date range specified';
+        }
+
+        // Check and display the selected OEP
+        if (!empty($this->input->get('oep-id'))) {
+            $oep_id = $this->input->get('oep-id');
+            $this->load->model('MedicalTestModel');
+            $oep_details = $this->MedicalTestModel->get_details_of_oep_by_id($oep_id);
+
+            if (!empty($oep_details)) {
+           
+                echo "<strong> | OEP:</strong> " . $oep_details->name;
+            } else {
+                echo " | OEP: Not Found";
+            }
+        }
+    ?>
+</td>
     </tr>
     </tbody>
 </table>
-<table class="items" width="100%" style="font-size: 9pt; border-collapse: collapse; margin-top: 25px" cellpadding="8"
-       border="1">
+<table class="items" width="100%" style="font-size: 9pt; border-collapse: collapse; margin-top: 25px" cellpadding="8" border="1">
     <thead>
     <tr>
-        <th> Sr. No</th>
-        <th align="left"> Lab No</th>
-        <th align="left"> Name</th>
-        <th align="left"> Father Name</th>
-        <th align="left"> CNIC | Passport</th>
-        <th align="left"> Trade | Natl</th>
-        <th align="left"> Age | Gen (DOB)</th>
-        <th align="left"> Country to Visit</th>
-        <th align="left"> Spec. Received</th>
-        <th align="left"> OEP/Ref By</th>
-        <th align="left"> Payment Method</th>
-        <th align="left"> Status</th>
+        <th align="right">Sr. No</th>
+        <th align="left">Lab No</th>
+        <th align="left">Name</th>
+        <th align="left">Father Name</th>
+        <th align="left">CNIC | Passport</th>
+        <th align="left">Trade | Natl</th>
+        <th align="left">Age | Gen (DOB)</th>
+        <th align="left">Country to Visit</th>
+        <th align="left">Spec. Received</th>
+        <th align="left">OEP/Ref By</th>
+        <th align="left">Payment Method</th>
+        <th align="left">Payment</th>
+        <th align="left">Status</th>
     </tr>
     </thead>
     <tbody>
     <?php
         $counter = 1;
-        if ( count ( $tests ) > 0 ) {
-            foreach ( $tests as $test ) {
-                $country     = get_country_by_id ( $test -> country_id );
-                $age         = calculateAge ( $test -> dob );
-                $nationality = get_country_by_id ( $test -> nationality );
+        $total_payments = 0; // Initialize total payments
+
+        if (count($tests) > 0) {
+            foreach ($tests as $test) {
+                $country     = get_country_by_id($test->country_id);
+                $age         = calculateAge($test->dob);
+                $nationality = get_country_by_id($test->nationality);
+
+                // Calculate payment for the test
+                $this->load->model('MedicalTestModel');
+                $oep_details = $this->MedicalTestModel->get_details_of_oep_by_id($test->oep_id);
+                $payment = isset($oep_details->price) ? $oep_details->price : 0;
+                $total_payments += $payment; // Add to total payments
                 ?>
                 <tr>
-                    <td><?php echo $counter++ ?></td>
-                    <td><?php echo medical_test_lab_no_prefix . $test -> lab_no ?></td>
-                    <td><?php echo $test -> name ?></td>
-                    <td><?php echo $test -> father_name ?></td>
+                    <td align="right"><?php echo $counter++ ?></td>
+                    <td><?php echo medical_test_lab_no_prefix . $test->lab_no ?></td>
+                    <td><?php echo $test->name ?? 'N/A' ?></td>
+                    <td><?php echo $test->father_name ?? 'N/A' ?></td>
                     <td>
                         <?php
-                            if ( !empty( trim ( $test -> identity ) ) )
-                                echo $test -> identity;
-                            
-                            if ( !empty( trim ( $test -> passport ) ) )
-                                echo '|' . $test -> passport;
+                            echo $test->identity ?? '';
+                            echo !empty(trim($test->passport)) ? '|' . $test->passport : '';
                         ?>
                     </td>
                     <td>
                         <?php
-                            if ( !empty( trim ( $test -> trade ) ) )
-                                echo $test -> trade;
-                            
-                            if ( !empty( trim ( $test -> nationality ) ) )
-                                echo '|' . $nationality -> title;
+                            echo $test->trade ?? '';
+                            echo isset($nationality->title) ? '|' . $nationality->title : '';
                         ?>
                     </td>
                     <td>
                         <?php
-                            echo $age;
-                            if ( !empty( trim ( $test -> gender ) ) )
-                                echo '|' . ucwords ( $test -> gender )
+                            echo $age ?? '-';
+                            echo !empty(trim($test->gender)) ? '|' . ucwords($test->gender) : '';
                         ?>
                     </td>
-                    <td><?php echo !empty( $country ) ? $country -> title : '-' ?></td>
-                    <td><?php echo date_setter ( $test -> spec_received ) ?></td>
-                    
-                    <td><?php echo $test -> oep ?></td>
-                    <td><?php echo ucwords ( $test -> payment_method ) ?></td>
+                    <td><?php echo $country->title ?? '-' ?></td>
+                    <td><?php echo date_setter($test->spec_received) ?></td>
+                    <td><?php echo $test->oep ?? 'N/A' ?></td>
+                    <td><?php echo ucwords($test->payment_method ?? 'Not Specified') ?></td>
+                    <td><?php echo $payment > 0 ? $payment : '0.00'; ?></td>
                     <td>
                         <?php
-                            if ( $test -> fit === '1' )
-                                echo '<span class="badge badge-success">Fit</span>';
-                            else if ( $test -> fit === '2' )
-                                echo '<span class="badge badge-warning">Pending</span>';
-                            else if ( $test -> fit === '3' )
-                                echo '<span class="badge badge-primary">Defer</span>';
-                            else if ( $test -> fit === '0' )
-                                echo '<span class="badge badge-danger">UnFit</span>';
+                            switch ($test->fit) {
+                                case '1':
+                                    echo '<span class="badge badge-success">Fit</span>';
+                                    break;
+                                case '2':
+                                    echo '<span class="badge badge-warning">Pending</span>';
+                                    break;
+                                case '3':
+                                    echo '<span class="badge badge-primary">Defer</span>';
+                                    break;
+                                default:
+                                    echo '<span class="badge badge-danger">UnFit</span>';
+                            }
                         ?>
                     </td>
                 </tr>
@@ -173,7 +199,15 @@ mpdf-->
         }
     ?>
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="11" style="text-align: right; font-weight: bold;">Total Payments:</td>
+            <td><strong><?php echo $total_payments; ?></strong></td>
+            <td></td>
+        </tr>
+    </tfoot>
 </table>
+
 
 </body>
 </html>
