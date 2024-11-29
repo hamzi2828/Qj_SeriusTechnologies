@@ -228,19 +228,19 @@
     });
 
     document.getElementById('addRowButton3').addEventListener('click', function () {
-        addRow('tableBody3', 'row_name_3[]', 'row_value_3[]', 4);
+        addRow('tableBody3', 'row_name_3[]', 'row_value_3[]', 100);
     });
 
     document.getElementById('addRowButton4').addEventListener('click', function () {
-        addRow('tableBody4', 'row_name_4[]', 'row_value_4[]', 2);
+        addRow('tableBody4', 'row_name_4[]', 'row_value_4[]', 100);
     });
 
     document.getElementById('addRowButton5').addEventListener('click', function () {
-        addRow('tableBody5', 'row_name_5[]', 'row_value_5[]', 9);
+        addRow('tableBody5', 'row_name_5[]', 'row_value_5[]', 100);
     });
 
     document.getElementById('addRowButton6').addEventListener('click', function () {
-        addRow('tableBody6', 'row_name_6[]', 'row_value_6[]', 1);
+        addRow('tableBody6', 'row_name_6[]', 'row_value_6[]', 100);
     });
 
     // General function to add a row in a table section
